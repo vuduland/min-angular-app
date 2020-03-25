@@ -10,6 +10,14 @@ import { Component, OnInit } from '@angular/core';
           <img src="assets/img/angular-logo.png" />
         </a>
       </div>
+
+      <!-- menu -->
+      <div class="navbar-menu navbar-end">
+        <div class="navbar-end">
+          <a class="navbar-item" routerLink="/">Home</a>
+          <a class="navbar-item" routerLink="contact">Contact</a>
+        </div>
+      </div>
     </div>
   `,
   styles: [],

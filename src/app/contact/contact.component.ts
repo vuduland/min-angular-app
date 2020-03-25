@@ -14,17 +14,42 @@ import { Component, OnInit } from '@angular/core';
     <section class="section">
       <div class="container">
         <!-- contact form -->
-        <form (ngSubmit)="submitForm()">
+        <form (ngSubmit)="submitForm()" #contactForm="ngForm">
+          <!-- {{ contactForm.valid }} pipe -->
           <!-- name -->
           <div class="field">
             <label class="label">Name</label>
-            <input type="text" name="name" class="input" [(ngModel)]="name" />
+            <input
+              type="text"
+              name="name"
+              class="input"
+              [(ngModel)]="name"
+              #nameInput="ngModel"
+              required
+            />
+            <!-- {{ nameInput.errors | json }}   this is a pipe which shows the errors on the page -->
+            <div class="help is-error" *ngIf="nameInput.invalid && nameInput.touched">
+              Your name is required.
+            </div>
           </div>
 
           <!-- email -->
           <div class="field">
             <label class="label">Email</label>
-            <input type="email" name="email" class="input" [(ngModel)]="email" email="true" />
+            <input
+              type="email"
+              name="email"
+              class="input"
+              [(ngModel)]="email"
+              email="true"
+              #emailInput="ngModel"
+              required
+              email
+            />
+            <!-- {{ emailInput.errors | json }} -->
+            <div class="help is-error" *ngIf="emailInput.invalid && emailInput.touched">
+              Your email is required and needs to be a valid email.
+            </div>
           </div>
 
           <!-- message -->
@@ -34,7 +59,7 @@ import { Component, OnInit } from '@angular/core';
           </div>
 
           <!-- submit button -->
-          <button type="submit" class="button is-small is-warning">
+          <button type="submit" class="button is-small is-warning" [disabled]="contactForm.invalid">
             Send!
           </button>
         </form>
