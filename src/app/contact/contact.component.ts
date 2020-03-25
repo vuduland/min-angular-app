@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EmailValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -15,22 +14,25 @@ import { EmailValidator } from '@angular/forms';
     <section class="section">
       <div class="container">
         <!-- contact form -->
-        <form>
+        <form (ngSubmit)="submitForm()">
           <!-- name -->
           <div class="field">
             <label class="label">Name</label>
-            <input type="text" name="name" class="input" />
+            <input type="text" name="name" class="input" [(ngModel)]="name" />
           </div>
+
           <!-- email -->
           <div class="field">
             <label class="label">Email</label>
-            <input type="email" name="email" class="input" ngModel email="true" />
+            <input type="email" name="email" class="input" [(ngModel)]="email" email="true" />
           </div>
+
           <!-- message -->
           <div class="field">
             <label class="label">Your Message</label>
-            <textarea name="message" class="textarea"></textarea>
+            <textarea name="message" class="textarea" [(ngModel)]="message"></textarea>
           </div>
+
           <!-- submit button -->
           <button type="submit" class="button is-small is-warning">
             Send!
@@ -42,11 +44,17 @@ import { EmailValidator } from '@angular/forms';
   styles: [],
 })
 export class ContactComponent implements OnInit {
-  name: String;
-  email: EmailValidator;
-  message: String;
+  name: string;
+  email: string;
+  message: string;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  submitForm() {
+    const message = `My name is ${this.name}, my email is ${this.email}, and my message is "${this.message}."`;
+    // grab all the fields and their values
+    alert(message);
+  }
 }
